@@ -24,3 +24,8 @@ header.masthead {
     letter-spacing: 0.0625em;
     font-weight: 900;
   }
+
+  video {
+    width: 100%;
+    height: auto;
+  }
