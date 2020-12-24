@@ -76,3 +76,10 @@ header.masthead {
   position: relative;
   top: 5px;
 }
+
+#lista-comentarios{
+  margin-bottom: 50px
+}
+#comentarios-loading{
+  text-align: center;
+}
