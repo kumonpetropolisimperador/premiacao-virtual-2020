@@ -6,7 +6,7 @@ $(document).ready(function () {
         Swal.showLoading();
         $.ajax({
             method: "POST",
-            url: "https://api-elton.herokuapp.com/kumonPremiacao/sendComentario",
+            url: "https://cors-anywhere.herokuapp.com/http://api-elton.herokuapp.com/kumonPremiacao/sendComentario",
             data: $(this).serialize(),
             success: function (data) {
                 console.log(data);
@@ -20,7 +20,7 @@ $(document).ready(function () {
     function getComentarios(){
         $.ajax({
             method: "GET",
-            url: "https://api-elton.herokuapp.com/kumonPremiacao/getComentarios",
+            url: "http://api-elton.herokuapp.com/kumonPremiacao/getComentarios",
             success: function (data) {
                 console.log(data);
                 var html = "";
@@ -32,7 +32,7 @@ $(document).ready(function () {
                 html += '</div>'
                 html += '</div>'
 
-                $("#lista-comentarios").html(html);
+                // $("#lista-comentarios").html(html);
             }
         });
     }
