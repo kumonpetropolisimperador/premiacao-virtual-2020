@@ -29,22 +29,27 @@ $(document).ready(function () {
 
     function getComentarios() {
 
-        comentarios.where('deletado', '==', 0).where('verificado', '==', 1).get().then(function (e) {
+        comentarios.where('deletado', '==', 0).where('teste', '==', 0).where('verificado', '==', 1).get().then(function (e) {
             console.log(e.docs);
+
             var html = "";
-            e.docs.forEach(item => {
-                var item = item.data();
-                var data_criacao = item.data_criacao;
-                // console.log(new Date(data_criacao.seconds * 1000));
-                data_criacao = new Date(data_criacao.seconds * 1000);
-                html += '<div class="card mb-15">';
-                html += '<div class="card-body">';
-                html += '<h5 class="card-title">' + item.nome + '</h5>';
-                html += '<h6 class="card-subtitle mb-2 text-muted">' + data_criacao.getDate() + '/' + data_criacao.getMonth() + '/' + data_criacao.getFullYear() + '</h6>';
-                html += '<p class="card-text">' + item.texto + '</p>';
-                html += '</div>';
-                html += '</div>';
-            });
+            if (e.docs.length === 0) {
+                html += "<p class='text-center'>Seja o primeiro a comentar!</p>"
+            } else {
+                e.docs.forEach(item => {
+                    var item = item.data();
+                    var data_criacao = item.data_criacao;
+                    // console.log(new Date(data_criacao.seconds * 1000));
+                    data_criacao = new Date(data_criacao.seconds * 1000);
+                    html += '<div class="card mb-15">';
+                    html += '<div class="card-body">';
+                    html += '<h5 class="card-title">' + item.nome + '</h5>';
+                    html += '<h6 class="card-subtitle mb-2 text-muted">' + data_criacao.getDate() + '/' + data_criacao.getMonth() + '/' + data_criacao.getFullYear() + '</h6>';
+                    html += '<p class="card-text">' + item.texto + '</p>';
+                    html += '</div>';
+                    html += '</div>';
+                });
+            }
             $("#lista-comentarios").html(html);
         })
     }
@@ -93,7 +98,8 @@ function fazerComentario() {
                 texto: answers[2],
                 data_criacao: new Date(),
                 verificado: 0,
-                deletado: 0
+                deletado: 0,
+                teste: 0
             }).then(function () {
                 Swal.hideLoading();
                 Swal.fire("Sucesso!", "Seu comentário foi enviado com sucesso! Em breve ele aparecerá na página!", "success");

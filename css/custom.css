@@ -95,3 +95,7 @@ header.masthead {
 .mb-15{
   margin-bottom: 15px;
 }
+
+#lista-comentarios > span{
+  text-align: center;
+}
