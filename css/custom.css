@@ -99,3 +99,7 @@ header.masthead {
 #lista-comentarios > span{
   text-align: center;
 }
+
+.swal2-container{
+  cursor: pointer;
+}

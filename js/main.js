@@ -1,7 +1,27 @@
-var comentarios = db.collection('premiacao-2020-comentarios');
+var comentarios = db.collection('premiacao-2020-comentarios');  
+
 $(document).ready(function () {
 
     console.log('running...');
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        // timer: 3000,
+        didOpen: (toast) => {
+          toast.addEventListener('mouseenter', Swal.stopTimer)
+          toast.addEventListener('mouseleave', Swal.resumeTimer)
+          toast.addEventListener('click', function(){
+              window.location = '#comentarios';
+          })
+        }
+      })
+    
+
+    Toast.fire({
+        icon: 'success',
+        title: 'Não se esqueça de publicar um comentário!'
+      })
 
     // $("#comentarios-form").submit(function (e) {
     //     e.preventDefault();
