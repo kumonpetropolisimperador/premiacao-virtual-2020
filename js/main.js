@@ -13,6 +13,7 @@ $(document).ready(function () {
           toast.addEventListener('mouseleave', Swal.resumeTimer)
           toast.addEventListener('click', function(){
               window.location = '#comentarios';
+              Swal.close()
           })
         }
       })
