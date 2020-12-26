@@ -54,7 +54,7 @@ $(document).ready(function () {
 
             var html = "";
             if (e.docs.length === 0) {
-                html += "<p class='text-center'>Seja o primeiro a comentar!</p>"
+                html += "<p class='text-center'>Seja o primeiro a publicar!</p>"
             } else {
                 e.docs.forEach(item => {
                     var item = item.data();
