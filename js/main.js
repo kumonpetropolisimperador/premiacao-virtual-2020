@@ -1,4 +1,4 @@
-var comentarios = db.collection('premiacao-2020-comentarios');  
+var comentarios = db.collection('premiacao-2020-comentarios');
 
 $(document).ready(function () {
 
@@ -9,20 +9,22 @@ $(document).ready(function () {
         showConfirmButton: false,
         timer: 3000,
         didOpen: (toast) => {
-          toast.addEventListener('mouseenter', Swal.stopTimer)
-          toast.addEventListener('mouseleave', Swal.resumeTimer)
-          toast.addEventListener('click', function(){
-              window.location = '#comentarios';
-              Swal.close()
-          })
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+            toast.addEventListener('click', function () {
+                window.location = '#comentarios';
+                Swal.close()
+            })
         }
-      })
-    
+    })
 
-    Toast.fire({
-        icon: 'success',
-        title: 'Não se esqueça de publicar um comentário!'
-      })
+
+    setTimeout(function () {
+        Toast.fire({
+            icon: 'success',
+            title: 'Não se esqueça de publicar um comentário!'
+        })
+    }, 5000);
 
     // $("#comentarios-form").submit(function (e) {
     //     e.preventDefault();
