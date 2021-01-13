@@ -1,6 +1,7 @@
 var comentarios = db.collection('premiacao-2020-comentarios');
+comentarios.orderBy("data_criacao").limit(3)
 
-$(document).ready(function () {
+$(document).ready(function() {
 
     console.log('running...');
     const Toast = Swal.mixin({
@@ -11,7 +12,7 @@ $(document).ready(function () {
         didOpen: (toast) => {
             toast.addEventListener('mouseenter', Swal.stopTimer)
             toast.addEventListener('mouseleave', Swal.resumeTimer)
-            toast.addEventListener('click', function () {
+            toast.addEventListener('click', function() {
                 window.location = '#comentarios';
                 Swal.close()
             })
@@ -19,7 +20,7 @@ $(document).ready(function () {
     })
 
 
-    setTimeout(function () {
+    setTimeout(function() {
         Toast.fire({
             icon: 'success',
             title: 'Não se esqueça de publicar um comentário!'
@@ -52,9 +53,8 @@ $(document).ready(function () {
 
     function getComentarios() {
 
-        comentarios.where('deletado', '==', 0).where('teste', '==', 0).where('verificado', '==', 1).get().then(function (e) {
-            console.log(e.docs);
-
+        comentarios.where('deletado', '==', 0).where('teste', '==', 0).where('verificado', '==', 1).orderBy('data_criacao').get().then(function(e) {
+            // console.log(e.docs);
             var html = "";
             if (e.docs.length === 0) {
                 html += "<p class='text-center'>Seja o primeiro a publicar!</p>"
@@ -64,10 +64,19 @@ $(document).ready(function () {
                     var data_criacao = item.data_criacao;
                     // console.log(new Date(data_criacao.seconds * 1000));
                     data_criacao = new Date(data_criacao.seconds * 1000);
+                    console.log(data_criacao.getMonth() + 1);
+                    var mes = data_criacao.getMonth() + 1;
+                    var dia = data_criacao.getDate();
+                    if (mes == 1) {
+                        mes = '01';
+                    }
+                    if (dia < 10) {
+                        dia = "0" + dia;
+                    }
                     html += '<div class="card mb-15">';
                     html += '<div class="card-body">';
                     html += '<h5 class="card-title">' + item.nome + '</h5>';
-                    html += '<h6 class="card-subtitle mb-2 text-muted">' + data_criacao.getDate() + '/' + data_criacao.getMonth() + '/' + data_criacao.getFullYear() + '</h6>';
+                    html += '<h6 class="card-subtitle mb-2 text-muted">' + dia + '/' + mes + '/' + data_criacao.getFullYear() + '</h6>';
                     html += '<p class="card-text">' + item.texto + '</p>';
                     html += '</div>';
                     html += '</div>';
@@ -86,8 +95,7 @@ function fazerComentario() {
         confirmButtonText: 'Próximo',
         showCancelButton: true,
         progressSteps: ['1', '2', '3']
-    }).queue([
-        {
+    }).queue([{
             input: 'text',
             title: 'Seu nome',
             required: "required",
@@ -121,7 +129,7 @@ function fazerComentario() {
                 verificado: 0,
                 deletado: 0,
                 teste: 0
-            }).then(function () {
+            }).then(function() {
                 Swal.hideLoading();
                 Swal.fire("Sucesso!", "Seu comentário foi enviado com sucesso! Em breve ele aparecerá na página!", "success");
             });
