@@ -54,7 +54,7 @@ $(document).ready(function() {
     function getComentarios() {
 
         comentarios.where('deletado', '==', 0).where('teste', '==', 0).where('verificado', '==', 1).orderBy('data_criacao').get().then(function(e) {
-            // console.log(e.docs);
+            console.log(e.docs);
             var html = "";
             if (e.docs.length === 0) {
                 html += "<p class='text-center'>Seja o primeiro a publicar!</p>"
