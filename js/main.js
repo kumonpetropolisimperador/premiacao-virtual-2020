@@ -58,13 +58,14 @@ $(document).ready(function() {
             if (e.docs.length === 0) {
                 html += "<p class='text-center'>Seja o primeiro a publicar!</p>"
             } else {
+                var comentariosObj = [];
                 e.docs.forEach(item => {
                     var item = item.data();
-                    console.log(item);
+                    comentariosObj.push(item);
                     var data_criacao = item.data_criacao;
                     // console.log(new Date(data_criacao.seconds * 1000));
                     data_criacao = new Date(data_criacao.seconds * 1000);
-                    console.log(data_criacao.getMonth() + 1);
+                    // console.log(data_criacao.getMonth() + 1);
                     var mes = data_criacao.getMonth() + 1;
                     var dia = data_criacao.getDate();
                     if (mes == 1) {
@@ -81,6 +82,7 @@ $(document).ready(function() {
                     html += '</div>';
                     html += '</div>';
                 });
+                console.log(comentariosObj);
             }
             $("#lista-comentarios").html(html);
         })
