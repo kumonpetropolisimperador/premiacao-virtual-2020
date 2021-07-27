@@ -54,13 +54,13 @@ $(document).ready(function() {
     function getComentarios() {
 
         comentarios.where('deletado', '==', 0).where('teste', '==', 0).where('verificado', '==', 1).orderBy('data_criacao').get().then(function(e) {
-            console.log(e.docs);
             var html = "";
             if (e.docs.length === 0) {
                 html += "<p class='text-center'>Seja o primeiro a publicar!</p>"
             } else {
                 e.docs.forEach(item => {
                     var item = item.data();
+                    console.log(item);
                     var data_criacao = item.data_criacao;
                     // console.log(new Date(data_criacao.seconds * 1000));
                     data_criacao = new Date(data_criacao.seconds * 1000);
